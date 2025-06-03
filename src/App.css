@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
 /* Sur ordinateur */
 
 /* .hoverImg, .prev-link {
@@ -7,7 +10,51 @@
 } */
 
 .div-song {
-  width: 50%;
+  width: 60%;
+  margin-top: 30px;
+}
+
+
+p {
+  font-family: "Fanwood Text";
+  font-style: italic;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  padding: 0;
+  margin: 0px;
+  font-family: "Tilt Neon";
+  font-size: clamp(14px, 5vw, 70px);
+  letter-spacing: -3px;
+  transition: 200ms ease;
+  font-variation-settings: "wght" 311;
+  position: relative;
+}
+
+h1:after {
+  position: absolute;
+  opacity: 0;
+  content: attr(data-text);
+  color: red;
+  padding: 0;
+  margin: 0px;
+  font-family: "Tilt Neon";
+  font-size: clamp(14px, 6.4vw, 80px);
+  letter-spacing: -3px;
+  transition: 200ms ease;
+  font-variation-settings: "wght" 311;
+  z-index: 1000;
+}
+
+h1:hover {
+  font-variation-settings: "wght" 582; 
+  letter-spacing: 1px;
+}
+
+h1:hover::after{
+  opacity: 1;
 }
 
 

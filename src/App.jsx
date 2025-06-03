@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import AudioPlayer from './assets/components/AudioPlayer'
-
+import ScrambledText from './assets/components/ScrambledText'
 
 function App() {
 
@@ -49,6 +49,7 @@ function App() {
       //     song.title.toLowerCase().includes(recherche.toLowerCase()) ||
       //     song.artist.name.toLowerCase().includes(recherche.toLowerCase())
       // )
+
         donnees.map(element => 
           <div key={element.id} className="div-song"
               onMouseOver={() => {
@@ -65,7 +66,15 @@ function App() {
                 // setHoverImage(null)
                 // setHoverPreview(null)
               }}>
-            <h1>{element.title}</h1>
+            {/* <ScrambledText
+              className="scrambled-text-demo"
+              radius={100}
+              duration={1.2}
+              speed={0.5}
+              scrambleChars=".:"
+            > */}
+            <h1 data-text={element.title}>{element.title}</h1>
+            {/* </ScrambledText> */}
             <p>{element.artist.name}</p>
               {/* {hoverImage && <img className="hoverImg" src={hoverImage} alt="hovered" />}
               {hoverPreview && <a className="prev-link" href={hoverPreview}>click</a>} */}
