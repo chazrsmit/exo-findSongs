@@ -24,6 +24,7 @@ function App() {
     if (recherche.trim() === "") {
       setDonnees([])
       setRecherche("")
+      setHoveredElement(null)
       return;
     }
 
@@ -38,7 +39,7 @@ function App() {
     <>
 
    
-      <input type="text" onChange={(e) => setRecherche(e.target.value)} />
+      <input type="text" placeholder="cherche une chanson" onChange={(e) => setRecherche(e.target.value)} />
 
       {/* Si l'utilisateur entre quelque chose, il y aura un affichage qui va s'effectuer */}
 
@@ -81,7 +82,6 @@ function App() {
           </div>
         )
       }
-
 
 
         {hoveredElement && (

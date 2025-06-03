@@ -28,7 +28,7 @@ h1 {
   font-family: "Tilt Neon";
   font-size: clamp(14px, 5vw, 70px);
   letter-spacing: -3px;
-  transition: 200ms ease;
+  transition:  200ms ease;
   font-variation-settings: "wght" 311;
   position: relative;
 }
@@ -55,6 +55,29 @@ h1:hover {
 
 h1:hover::after{
   opacity: 1;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+input::placeholder {
+  color: black;
+  animation: flash 0.1s infinite;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+input[placeholder] {
+
 }
 
 
