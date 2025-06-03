@@ -7,12 +7,13 @@
 } */
 
 .div-song {
-
   width: 50%;
 }
 
 
 /* Sur téléphone et tablette */
+
+
 
 /* Bases */
 
@@ -23,7 +24,7 @@ body {
   height: 100vh;
   overflow-y: scroll;
   -ms-overflow-style: none;  
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 html {
   margin: 0;

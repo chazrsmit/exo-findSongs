@@ -1,5 +1,21 @@
-.audio-player {
+/* Sur ordinateur */
+
+.hoverImg {
+    position: fixed;
+    right: 0px;
+    top: 200px;
+}
+
+.prev-link {
+    position: fixed;
+    right: -24px;
+    top: 450px;
+    scale: 0.84;
+}
+
+/* .audio-player {
     position: fixed;
     right: 0px;
     top: 250px;
-}
+} */
+
