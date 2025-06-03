@@ -76,7 +76,7 @@ function App() {
               setIsPlaying(false)
             }}
           >
-            <h1 data-text={element.title}>{element.title}</h1>
+            <h1 className={`h1-1 ${hoveredElement === element ? "selected" : ""}`} data-text={element.title}>{element.title}</h1>
             <p className={`p-artist ${hoveredElement === element ? "selected" : ""}`}>{element.artist.name}</p>
           </div>
         )
