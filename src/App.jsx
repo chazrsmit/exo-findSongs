@@ -16,9 +16,27 @@ function App() {
   const [isFocused, setIsFocused] = useState(false)
 
   const[hoverColor, setHoverColor] = useState(null)
+  const[hoverColorAfter, setHoverColorAfter] = useState(null)
 
+  const getRandomColor = () => {
+  const letters = '012356789ABCDEF'
+  let color = '#'
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)]
+  }
+  return color
+  }
 
+  // const colorOptions = [
+  // '#cf4d6f', '#c3acce', '#2a7f62', '#63adf2',
+  // '#f5dd90', '#324376', '#b0db43', '#582c4d',
+  // '#cc8b86', '#256eff', '#ff495c', '#c4f5fc',
+  // '#eb5e55', '#4f5d75', '#edbbb4', '#f7b05b']
 
+  // const getRandomColor = () => {
+  //   const randomIndex = Math.floor(Math.random() * colorOptions.length)
+  //   return colorOptions[randomIndex]
+  // }
 
   useEffect(() => {
     console.log(recherche)
@@ -67,6 +85,10 @@ function App() {
             className="div-song"
             onMouseOver={() => {
               setHoveredElement(element)
+              if (!hoveredElement || hoveredElement.id !== element.id) {
+              setHoverColor(getRandomColor())
+              setHoverColorAfter(getRandomColor())
+              }
             }}
             onMouseOut={() => {
               if (audioRef.current) {
@@ -76,7 +98,27 @@ function App() {
               setIsPlaying(false)
             }}
           >
-            <h1 className={`h1-1 ${hoveredElement === element ? "selected" : ""}`} data-text={element.title}>{element.title}</h1>
+            <h1
+            className={`h1-1 ${hoveredElement === element ? "selected" : ""}`}
+            onMouseOver={() => {
+              if (!hoveredElement || hoveredElement.id !== element.id) {
+              setHoverColor(getRandomColor())
+              setHoverColorAfter(getRandomColor())
+              }
+            }}
+            // onMouseOut={() => {
+            //   setHoverColor(null)
+            //   setHoverColorAfter(null)
+            // }}
+            data-text={element.title}
+            style={{
+              '--hover-color': hoverColor,
+              '--hover-color-after': hoverColorAfter,
+              color: hoveredElement?.id === element.id ? hoverColor : 'inherit'
+            }}
+            >
+              {element.title}
+            </h1>
             <p className={`p-artist ${hoveredElement === element ? "selected" : ""}`}>{element.artist.name}</p>
           </div>
         )
