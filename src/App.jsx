@@ -18,6 +18,8 @@ function App() {
   const[hoverColor, setHoverColor] = useState(null)
 
 
+
+
   useEffect(() => {
     console.log(recherche)
 
@@ -63,7 +65,9 @@ function App() {
           <div
             key={element.id}
             className="div-song"
-            onMouseOver={() => setHoveredElement(element)}
+            onMouseOver={() => {
+              setHoveredElement(element)
+            }}
             onMouseOut={() => {
               if (audioRef.current) {
                 audioRef.current.pause()
@@ -73,7 +77,7 @@ function App() {
             }}
           >
             <h1 data-text={element.title}>{element.title}</h1>
-            <p>{element.artist.name}</p>
+            <p className={`p-artist ${hoveredElement === element ? "selected" : ""}`}>{element.artist.name}</p>
           </div>
         )
       }

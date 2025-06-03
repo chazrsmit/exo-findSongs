@@ -11,6 +11,10 @@
   top: 250px;
 } */
 
+body {
+  background-color: white;
+}
+
 .bg-title {
   position: fixed;
   top: 0;
@@ -31,9 +35,8 @@
   margin: 0;
   padding: 0;
   z-index: 0;
-  position: relative;
+  /* position: relative; */
   font-family: "Jacquard 24";
-  mix-blend-mode: color-dodge;
 }
 
 .div-song {
@@ -41,11 +44,15 @@
   margin-top: 10px;
 }
 
-p {
+.p-artist {
   font-family: "Nunito";
   font-style: italic;
   padding: 0;
   margin: 0;
+}
+
+.p-artist.selected {
+  font-weight: bold;
 }
 
 h1 {
@@ -58,6 +65,10 @@ h1 {
   font-variation-settings: "wght" 311;
   position: relative;
   z-index: 1;
+}
+
+.second-title {
+  display: none;
 }
 
 h1:after {
@@ -80,6 +91,7 @@ h1:hover {
   letter-spacing: 1px;
   color: white;
   font-style: italic;
+
 }
 
 h1:hover::after{
