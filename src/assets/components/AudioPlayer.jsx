@@ -1,50 +1,44 @@
-import { useRef, useState } from 'react'
 import './audioplayer.css'
 
-export default function AudioPlayer({ hoveredElement, audioSrc }) {
+export default function AudioPlayer({
+  hoveredElement,
+  audioSrc,
+  audioRef,
+  isPlaying,
+  setIsPlaying
+}) {
+  const togglePlayPause = () => {
+    if (!audioRef.current) return
 
-    // Variables d'état pour gérer le temps actuel du preview et le statut "is Played" :
-    // const [isPlaying, setIsPlaying] = useState(false)
-    // const [currentTime, setCurrentTime] = useState(0)
-    // const [duration, setDuration] = useState(0)
+    if (isPlaying) {
+      audioRef.current.pause()
+    } else {
+      audioRef.current.play()
+    }
+    setIsPlaying(!isPlaying)
+  }
 
-    // const audioRef = useRef(null)
-
-    // fonction pour aller chercher dans un endroit spécifique de l'audio :
-    // const handleSeek = (e) => {}
-
-
-    return(
-
-        <>
-        <div className="audio-player">
-            {hoveredElement.album?.cover_medium && (
-                <img className="hoverImg" src={hoveredElement.album.cover_medium} alt="hovered" />
-            )}
-
-            {/* Input pour rechercher les infos de l'audio  */}
-            {/* <input
-                type="range"
-                min="0"
-                max={duration}
-                value={currentTime}
-                onChange={handleSeek}
-            /> */}
-
-            {/* Pour jouer l'audio */}
-            <audio className="prev-link" controls src={audioSrc} />
-
-            {/* Faire apparaître les données temps */}
-            {/* <div className="track-duration">
-                <p>{currentTime}</p>
-                <p>{duration}</p>
-            </div> */}
-
-            {/* Boutons play/pause */}
-
-
+  return (
+    <div className="audio-player">
+      {hoveredElement.album?.cover_big && (
+        <div className="img-wrapper">
+          <img
+            className="hoverImg"
+            src={hoveredElement.album.cover_big}
+            alt="hovered"
+          />
+          <div
+            className={`play-button ${isPlaying ? 'pause' : 'play'}`}
+            onClick={togglePlayPause}
+          >
+            {isPlaying ?
+            <div className="push">❚❚</div>
+            :
+            <div className="push">▶</div>}
+          </div>
         </div>
-        </>
-
-    )
+      )}
+      <audio ref={audioRef} className="prev-link" src={audioSrc} />
+    </div>
+  )
 }

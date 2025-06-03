@@ -1,5 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jacquard+24&display=swap');
 
 /* Sur ordinateur */
 
@@ -9,14 +11,38 @@
   top: 250px;
 } */
 
-.div-song {
-  width: 60%;
-  margin-top: 30px;
+.bg-title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
+.bg-title p {
+  font-size: 25vw;
+  color: black;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  z-index: 0;
+  position: relative;
+  font-family: "Jacquard 24";
+  mix-blend-mode: color-dodge;
+}
+
+.div-song {
+  width: 65%;
+  margin-top: 10px;
+}
 
 p {
-  font-family: "Fanwood Text";
+  font-family: "Nunito";
   font-style: italic;
   padding: 0;
   margin: 0;
@@ -28,14 +54,15 @@ h1 {
   font-family: "Tilt Neon";
   font-size: clamp(14px, 5vw, 70px);
   letter-spacing: -3px;
-  transition:  200ms ease;
+  /* transition:  50ms ease; */
   font-variation-settings: "wght" 311;
   position: relative;
+  z-index: 1;
 }
 
 h1:after {
   position: absolute;
-  opacity: 0;
+  display:none;
   content: attr(data-text);
   color: red;
   padding: 0;
@@ -51,21 +78,82 @@ h1:after {
 h1:hover {
   font-variation-settings: "wght" 582; 
   letter-spacing: 1px;
+  color: white;
+  font-style: italic;
 }
 
 h1:hover::after{
-  opacity: 1;
+  display: inline;
 }
 
 input {
   outline: none;
   border: none;
+  position: relative;
+}
+.input-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
-input::placeholder {
-  color: black;
-  animation: flash 0.1s infinite;
+.input-wrapper input {
+  font-size: 1rem;
+  font-family: "Nunito";
+  width: 300px;
+  border: none;
+  outline: none;
 }
+
+.typewriter-placeholder {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-family: "Nunito";
+  font-size: 1rem;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid black;
+  width: 0;
+  animation: typing 2s steps(22, end) forwards, blink-caret 0.6s step-end infinite;
+  pointer-events: none;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 150px }
+}
+
+@keyframes blink-caret {
+  0%, 100% { border-color: transparent }
+  50% { border-color: black }
+}
+
+
+/* .input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.input-wrapper input {
+  font-size: 1rem;
+  font-family: "Nunito";
+}
+
+.animated-placeholder {
+  position: absolute;
+  left: 0px;
+  color: black;
+  font-family: "Nunito";
+  pointer-events: none;
+  animation: flash 0.6s infinite;
+}
+
+@keyframes flash {
+  0% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
 
 @keyframes flash {
   0% {
@@ -78,7 +166,7 @@ input::placeholder {
 
 input[placeholder] {
 
-}
+} */
 
 
 /* Sur téléphone et tablette */

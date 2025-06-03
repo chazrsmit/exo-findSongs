@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import AudioPlayer from './assets/components/AudioPlayer'
-import ScrambledText from './assets/components/ScrambledText'
 
 function App() {
-
  
   const [donnees, setDonnees] = useState([])
   const [recherche, setRecherche] = useState("")
-  // Variable qui va stocker l'image à afficher
-  // const [hoverImage, setHoverImage] = useState(null)
-  // on fait la même chose pour le preview
-  // const [hoverPreview, setHoverPreview] = useState(null)
   // on stocke l'élément entier, celui qu'on survole :
   const [hoveredElement, setHoveredElement] = useState(null)
+
+  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef(null)
+
+  const [isFocused, setIsFocused] = useState(false)
+
+  const[hoverColor, setHoverColor] = useState(null)
+
 
   useEffect(() => {
     console.log(recherche)
@@ -38,11 +40,18 @@ function App() {
   return (
     <>
 
-   
-      <input type="text" placeholder="cherche une chanson" onChange={(e) => setRecherche(e.target.value)} />
+      {/* <input type="text" placeholder='cherche une chanson' onChange={(e) => setRecherche(e.target.value)}/> */}
+      <div className="input-wrapper">
+        <input type="text" id="search" onChange={(e) => setRecherche(e.target.value)} onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)} />
+        {recherche === "" && !isFocused && (
+        <label htmlFor="search" className="typewriter-placeholder">
+          cherche une chanson
+        </label>
+      )}
+      </div>
 
       {/* Si l'utilisateur entre quelque chose, il y aura un affichage qui va s'effectuer */}
-
       { donnees.length > 0 &&
       // normalement on utiliserait filter, mais comme deezer s'occupe déjà de filtrer de son côté, on map directement. Sinon, le code ressemblerait à ça :
       // donnees.filter(
@@ -50,53 +59,31 @@ function App() {
       //     song.title.toLowerCase().includes(recherche.toLowerCase()) ||
       //     song.artist.name.toLowerCase().includes(recherche.toLowerCase())
       // )
-
         donnees.map(element => 
-          <div key={element.id} className="div-song"
-              onMouseOver={() => {
-              // en 2 étapes : on stocke l'image associée à l'élément sur lequel on hover ; s'il n'y a pas d'image, rien ne s'affichera
-                // const img = element.album?.cover_medium || element.artist?.picture_medium
-                // setHoverImage(img || null)
-                // const prev = element.preview 
-                // setHoverPreview(prev || null)
-                // setHoverId(element.id)
-                setHoveredElement(element)
-              }}
-              // quand on arrête d'hover, l'img n'est plus stockée => reset à null
-              onMouseOut={() => {
-                // setHoverImage(null)
-                // setHoverPreview(null)
-              }}>
-            {/* <ScrambledText
-              className="scrambled-text-demo"
-              radius={100}
-              duration={1.2}
-              speed={0.5}
-              scrambleChars=".:"
-            > */}
+          <div
+            key={element.id}
+            className="div-song"
+            onMouseOver={() => setHoveredElement(element)}
+            onMouseOut={() => {
+              if (audioRef.current) {
+                audioRef.current.pause()
+                audioRef.current.currentTime = 0
+              }
+              setIsPlaying(false)
+            }}
+          >
             <h1 data-text={element.title}>{element.title}</h1>
-            {/* </ScrambledText> */}
             <p>{element.artist.name}</p>
-              {/* {hoverImage && <img className="hoverImg" src={hoverImage} alt="hovered" />}
-              {hoverPreview && <a className="prev-link" href={hoverPreview}>click</a>} */}
           </div>
         )
       }
 
 
         {hoveredElement && (
-          <>
-
-          <AudioPlayer hoveredElement={hoveredElement} audioSrc={hoveredElement.preview} />
-            {/* {hoveredElement.album?.cover_medium && (
-              <img className="hoverImg" src={hoveredElement.album.cover_medium} alt="hovered" />
-            )}
-            {hoveredElement.preview && (
-              <a className="prev-link" href={hoveredElement.preview} target="_blank" rel="noopener noreferrer">
-                click
-              </a>
-            )} */}
-          </>
+        <>
+        <AudioPlayer hoveredElement={hoveredElement} audioSrc={hoveredElement.preview} audioRef={audioRef} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+        <div className="bg-title"><p>{hoveredElement.title}</p></div>
+        </>
         )}
 
 
