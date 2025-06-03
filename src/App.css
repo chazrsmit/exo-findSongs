@@ -1,10 +1,16 @@
 /* Sur ordinateur */
 
-.hoverImg {
+/* .hoverImg, .prev-link {
   position: fixed;
   right: 0px;
   top: 250px;
+} */
+
+.div-song {
+
+  width: 50%;
 }
+
 
 /* Sur téléphone et tablette */
 
@@ -16,12 +22,12 @@ body {
   box-sizing: border-box;
   height: 100vh;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  
+  scrollbar-width: none; 
 }
 html {
   margin: 0;
   padding: 0;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
 }
