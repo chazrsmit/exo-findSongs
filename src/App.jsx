@@ -50,7 +50,9 @@ function App() {
       return;
     }
 
-    axios.get(`https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${recherche}`)
+    // axios.get(`https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${recherche}`)
+    const proxyUrl = 'https://corsproxy.io/?';
+    axios.get(`${proxyUrl}https://api.deezer.com/search?q=${recherche}`)
       .then((response) => setDonnees(response.data.data))
       .catch((error) => console.log(error))
   }, [recherche])
